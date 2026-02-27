@@ -7,307 +7,164 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:20px;}
+.container{max-width:900px;margin:auto;}
+.card{background:white;border-radius:16px;padding:25px;margin-bottom:25px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);}
+h1{text-align:center;color:white;margin-bottom:25px;}
+h2{color:#333;margin-bottom:15px;}
+h3{color:#555;margin-bottom:10px;}
+label{font-weight:600;color:#444;}
+input[type="text"],select,input[type="password"]{
+width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;
+margin:8px 0 15px 0;
 }
-
-body {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    min-height: 100vh;
-    padding: 20px;
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-}
-
-.card {
-    background: white;
-    border-radius: 16px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    animation: fadeIn 0.5s ease;
-}
-
-h1 {
-    text-align: center;
-    color: white;
-    margin-bottom: 25px;
-}
-
-h2 {
-    color: #333;
-    margin-bottom: 15px;
-}
-
-h3 {
-    color: #555;
-    margin-bottom: 10px;
-}
-
-label {
-    font-weight: 600;
-    color: #444;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    margin: 8px 0 15px 0;
-    transition: 0.3s;
-}
-
-input:focus {
-    border-color: #667eea;
-    outline: none;
-    box-shadow: 0 0 5px rgba(102,126,234,0.5);
-}
-
-.question {
-    background: #f8f9ff;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-}
-
-button {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.submit-btn {
-    background: #667eea;
-    color: white;
-    width: 100%;
-}
-
-.submit-btn:hover {
-    background: #5a6fd6;
-    transform: scale(1.02);
-}
-
-.login-btn {
-    background: #28a745;
-    color: white;
-}
-
-.login-btn:hover {
-    background: #1e7e34;
-}
-
-.delete-btn {
-    background: #dc3545;
-    color: white;
-    margin-top: 15px;
-}
-
-.delete-btn:hover {
-    background: #b02a37;
-}
-
-.hidden {
-    display: none;
-}
-
-canvas {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 10px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+.question{background:#f8f9ff;padding:15px;border-radius:12px;margin-bottom:15px;}
+button{padding:12px 20px;border:none;border-radius:12px;font-size:16px;cursor:pointer;}
+.submit-btn{background:#667eea;color:white;width:100%;}
+.login-btn{background:#28a745;color:white;}
+.delete-btn{background:#dc3545;color:white;margin-top:15px;}
+.hidden{display:none;}
+canvas{background:#ffffff;border-radius:12px;padding:10px;}
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📊 Student Free Time Survey</h1>
+<h1>📊 Student Free Time Survey</h1>
 
-    <!-- FORMULARIO ESTUDIANTES -->
-    <div class="card">
-        <h2>👨‍🎓 Student Form</h2>
-        <form id="surveyForm">
-            <label>Name</label>
-            <input type="text" id="name" required>
+<div class="card">
+<h2>👨‍🎓 Student Form</h2>
+<form id="surveyForm">
 
-            <label>Email</label>
-            <input type="email" id="email" required>
+<label>Name</label>
+<input type="text" id="name" required>
 
-            <label>Group</label>
-            <input type="text" id="group" required>
+<label>Gender</label>
+<select id="gender" required>
+<option value="">Select gender</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+<option value="Other">Other</option>
+</select>
 
-            <h3>Answer the questions:</h3>
+<label>Group</label>
+<input type="text" id="group" required>
 
-            <div class="question">
-                <p>1. What would you rather, spending your free time outside or relaxing at home?</p>
-                <input type="radio" name="q1" value="Outside" required> Outside<br>
-                <input type="radio" name="q1" value="Home"> Relaxing at home
-            </div>
+<h3>Answer the questions:</h3>
 
-            <div class="question">
-                <p>2. Do you prefer spending weekends with friends or by yourself?</p>
-                <input type="radio" name="q2" value="Friends" required> With friends<br>
-                <input type="radio" name="q2" value="Alone"> By yourself
-            </div>
+<div class="question">
+1. What would you rather, spending your free time outside or relaxing at home?<br>
+<input type="radio" name="q1" value="Outside" required> Outside<br>
+<input type="radio" name="q1" value="Home"> Home
+</div>
 
-            <div class="question">
-                <p>3. Did you use to spend your free time doing sports or creative activities?</p>
-                <input type="radio" name="q3" value="Sports" required> Sports<br>
-                <input type="radio" name="q3" value="Creative"> Creative activities
-            </div>
+<div class="question">
+2. Do you prefer spending weekends with friends or by yourself?<br>
+<input type="radio" name="q2" value="Friends" required> Friends<br>
+<input type="radio" name="q2" value="Alone"> Alone
+</div>
 
-            <div class="question">
-                <p>4. Are you used to having a very busy week because of school?</p>
-                <input type="radio" name="q4" value="Yes" required> Yes<br>
-                <input type="radio" name="q4" value="No"> No
-            </div>
+<div class="question">
+3. Did you use to spend your free time doing sports or creative activities?<br>
+<input type="radio" name="q3" value="Sports" required> Sports<br>
+<input type="radio" name="q3" value="Creative"> Creative
+</div>
 
-            <div class="question">
-                <p>5. Have you had to get used to less free time recently?</p>
-                <input type="radio" name="q5" value="Yes" required> Yes<br>
-                <input type="radio" name="q5" value="No"> No
-            </div>
+<div class="question">
+4. Are you used to having a very busy week because of school?<br>
+<input type="radio" name="q4" value="Yes" required> Yes<br>
+<input type="radio" name="q4" value="No"> No
+</div>
 
-            <button class="submit-btn" type="submit">Submit Response</button>
-        </form>
-    </div>
+<div class="question">
+5. Have you had to get used to less free time recently?<br>
+<input type="radio" name="q5" value="Yes" required> Yes<br>
+<input type="radio" name="q5" value="No"> No
+</div>
 
-    <!-- ACCESO PROFESOR -->
-    <div class="card">
-        <h2>🔒 Teacher Access</h2>
-        <input type="password" id="teacherPass" placeholder="Enter password">
-        <button class="login-btn" onclick="login()">View Results</button>
-    </div>
+<button class="submit-btn" type="submit">Submit Response</button>
+</form>
+</div>
 
-    <!-- PANEL PROFESOR -->
-    <div class="card hidden" id="teacherPanel">
-        <h2>📈 Accumulated Results</h2>
-        <canvas id="resultsChart"></canvas>
-        <button class="delete-btn" onclick="clearDatabase()">🗑 Delete All Database</button>
-    </div>
+<div class="card">
+<h2>🔒 Teacher Access</h2>
+<input type="password" id="teacherPass" placeholder="Enter password">
+<button class="login-btn" onclick="login()">View Results</button>
+</div>
+
+<div class="card hidden" id="teacherPanel">
+<h2>📈 Accumulated Results</h2>
+<canvas id="resultsChart"></canvas>
+<button class="delete-btn" onclick="clearDatabase()">🗑 Delete All Database</button>
+</div>
 </div>
 
 <script>
-const PASSWORD = "profesor123";
+const PASSWORD="profesor123";
 let chart;
 
-function getDB(){
-    return JSON.parse(localStorage.getItem("surveyDB")) || [];
-}
-
-function saveDB(data){
-    const db = getDB();
-    db.push(data);
-    localStorage.setItem("surveyDB", JSON.stringify(db));
-}
+function getDB(){return JSON.parse(localStorage.getItem("surveyDB"))||[];}
+function saveDB(data){const db=getDB();db.push(data);
+localStorage.setItem("surveyDB",JSON.stringify(db));}
 
 function clearDatabase(){
-    if(confirm("Are you sure you want to delete all responses?")){
-        localStorage.removeItem("surveyDB");
-        updateChart();
-        alert("Database deleted");
-    }
-}
+if(confirm("Delete all responses?")){
+localStorage.removeItem("surveyDB");
+updateChart();
+alert("Database deleted");
+}}
 
 function calculate(){
-    const db = getDB();
-    const r = {Outside:0, Home:0, Friends:0, Alone:0, Sports:0, Creative:0, Yes:0, No:0};
-
-    db.forEach(s=>{
-        r[s.q1]++; r[s.q2]++; r[s.q3]++; r[s.q4]++; r[s.q5]++;
-    });
-
-    return r;
+const db=getDB();
+const r={Outside:0,Home:0,Friends:0,Alone:0,Sports:0,Creative:0,Yes:0,No:0};
+db.forEach(s=>{r[s.q1]++;r[s.q2]++;r[s.q3]++;r[s.q4]++;r[s.q5]++;});
+return r;
 }
 
 function updateChart(){
-    const res = calculate();
+const res=calculate();
+const labels=["Q1 Outside","Q1 Home","Q2 Friends","Q2 Alone",
+"Q3 Sports","Q3 Creative","Q4 Yes","Q4 No","Q5 Yes","Q5 No"];
+const dataValues=[res.Outside,res.Home,res.Friends,res.Alone,
+res.Sports,res.Creative,res.Yes,res.No];
 
-    const labels = [
-        "Q1 Outside","Q1 Home",
-        "Q2 Friends","Q2 Alone",
-        "Q3 Sports","Q3 Creative",
-        "Q4 Yes","Q4 No",
-        "Q5 Yes","Q5 No"
-    ];
+const ctx=document.getElementById("resultsChart").getContext("2d");
+if(chart) chart.destroy();
 
-    const dataValues = [
-        res.Outside,res.Home,
-        res.Friends,res.Alone,
-        res.Sports,res.Creative,
-        res.Yes,res.No
-    ];
-
-    const ctx = document.getElementById("resultsChart").getContext("2d");
-
-    if(chart) chart.destroy();
-
-    chart = new Chart(ctx,{
-        type:"bar",
-        data:{
-            labels:labels,
-            datasets:[{
-                label:"Total Student Responses",
-                data:dataValues
-            }]
-        },
-        options:{
-            responsive:true,
-            plugins:{
-                legend:{ labels:{ font:{ size:14 } } }
-            },
-            scales:{
-                y:{ beginAtZero:true, ticks:{ stepSize:1 } }
-            }
-        }
-    });
+chart=new Chart(ctx,{
+type:"bar",
+data:{labels:labels,datasets:[{label:"Total Student Responses",data:dataValues}]},
+options:{responsive:true,scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}
+});
 }
 
 function login(){
-    const pass = document.getElementById("teacherPass").value;
-    if(pass === PASSWORD){
-        document.getElementById("teacherPanel").classList.remove("hidden");
-        updateChart();
-    }else{
-        alert("Incorrect password");
-    }
+if(document.getElementById("teacherPass").value===PASSWORD){
+document.getElementById("teacherPanel").classList.remove("hidden");
+updateChart();
+}else{alert("Incorrect password");}
 }
 
 document.getElementById("surveyForm").addEventListener("submit",function(e){
-    e.preventDefault();
-
-    const data = {
-        name: name.value,
-        email: email.value,
-        group: group.value,
-        q1: document.querySelector('input[name="q1"]:checked').value,
-        q2: document.querySelector('input[name="q2"]:checked').value,
-        q3: document.querySelector('input[name="q3"]:checked').value,
-        q4: document.querySelector('input[name="q4"]:checked').value,
-        q5: document.querySelector('input[name="q5"]:checked').value
-    };
-
-    saveDB(data);
-    this.reset();
-    alert("Response saved successfully!");
+e.preventDefault();
+const data={
+name:name.value,
+gender:gender.value,
+group:group.value,
+q1:document.querySelector('input[name="q1"]:checked').value,
+q2:document.querySelector('input[name="q2"]:checked').value,
+q3:document.querySelector('input[name="q3"]:checked').value,
+q4:document.querySelector('input[name="q4"]:checked').value,
+q5:document.querySelector('input[name="q5"]:checked').value
+};
+saveDB(data);
+this.reset();
+alert("Response saved!");
 });
 </script>
 
 </body>
 </html>
+
